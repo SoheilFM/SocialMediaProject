@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import MainHeader from './MainHeader';
-import NavLinks from './NavLinks';
-import SideDrawer from './SideDrawer';
+import MainHeader from './MainHeader.js';
+import NavLinks from './NavLinks.js';
+import SideDrawer from './SideDrawer.js';
 import './MainNavigation.css';
 
 const MainNavigation = (props) => {
