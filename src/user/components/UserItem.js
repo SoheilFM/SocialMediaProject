@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Card from '../../shared/UIElements/Card.js';
 import './UserItem.css';
 import Avatar from '../../shared/UIElements/Avatar.js';
 
