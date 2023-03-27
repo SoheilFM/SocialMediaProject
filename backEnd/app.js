@@ -1,4 +1,6 @@
 const express = require('express');
+const mongoose = require('mongoose');
+require('dotenv').config();
 const bodyParser = require('body-parser');
 const placesRoutes = require('./routes/place-routes');
 const usersRoutes = require('./routes/user-routes');
@@ -16,6 +18,24 @@ app.use((error, req, res, next) => {
         message: error.message || 'An Unknown Error Occurred',
     });
 });
-app.listen(port, () => {
-    console.log(`Server is listening on port ${port}`);
+
+try {
+    mongoose.set('strictQuery', false);
+    mongoose.connect(process.env.MONGODB, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    });
+    console.log('MongoDB Connected...');
+    app.listen(port, () => {
+        console.log(`Server is listening on port ${port}`);
+    });
+} catch (error) {
+    console.log('Error connecting to MongoDB:', error.message);
+}
+mongoose.connection.on('disconnect', () => {
+    console.log('MongoDB Disconnected');
+});
+
+mongoose.connection.on('connect', () => {
+    console.log('MongoDB Connected');
 });
