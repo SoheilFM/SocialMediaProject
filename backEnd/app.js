@@ -1,12 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-
 const placesRoutes = require('./routes/place-routes');
-
+const usersRoutes = require('./routes/user-routes');
 const app = express();
 const port = 5000;
 
 app.use(bodyParser.json());
+app.use('/api/users', usersRoutes);
 app.use('/api/places', placesRoutes);
 app.use((error, req, res, next) => {
     if (res.headerSent) {
