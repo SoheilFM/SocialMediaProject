@@ -1,10 +1,8 @@
-const { v4: uuidv4 } = require('uuid');
 const { validationResult } = require('express-validator');
 const HttpError = require('../models/http-error');
 const Place = require('../models/place');
 const User = require('../models/user');
 const mongoose = require('mongoose');
-const mongooseUniqueValidator = require('mongoose-unique-validator');
 // Get a place by its ID
 const getPlaceById = async (req, res, next) => {
     const placeId = req.params.pid;
