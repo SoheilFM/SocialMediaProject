@@ -29,7 +29,7 @@ const signup = async (req, res, next) => {
             )
         );
     }
-    const { name, email, password, places } = req.body;
+    const { name, email, password } = req.body;
 
     let existingUser;
     try {
@@ -53,9 +53,9 @@ const signup = async (req, res, next) => {
     const createdUser = new User({
         name,
         email,
-        image: 'https://live.staticflickr.com/7631/26849088292_36fc52ee90_b.jpg',
+        image: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
         password,
-        places,
+        places: [],
     });
 
     try {
@@ -70,6 +70,7 @@ const signup = async (req, res, next) => {
 
     res.status(201).json({
         user: createdUser.toObject({ getters: true }),
+        message: 'User Has Been Created',
     });
 };
 
