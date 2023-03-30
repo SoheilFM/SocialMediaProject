@@ -9,6 +9,18 @@ const app = express();
 const port = 5000;
 
 app.use(bodyParser.json());
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Orgin', '*');
+    res.setHeader(
+        'Access-Control-Headers',
+        'Origin, X-Requested-with, Content-Type, Accept, Authorization'
+    );
+    res.setHeader(
+        'Access-Control-Allow-Methods',
+        'GET, POST,PATCH,DELETE'
+    );
+    next();
+});
 app.use('/api/places', placesRoutes);
 app.use('/api/users', usersRoutes);
 app.use((req, res, next) => {
