@@ -10,10 +10,10 @@ const port = 5000;
 
 app.use(bodyParser.json());
 app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Orgin', '*');
+    res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader(
-        'Access-Control-Headers',
-        'Origin, X-Requested-with, Content-Type, Accept, Authorization'
+        'Access-Control-Allow-Headers',
+        'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers'
     );
     res.setHeader(
         'Access-Control-Allow-Methods',
@@ -28,15 +28,15 @@ app.use((req, res, next) => {
     throw error;
 });
 
-// app.use((error, req, res, next) => {
-//     if (res.headerSent) {
-//         return next(error);
-//     }
-//     res.status(error.code || 500);
-//     res.json({
-//         message: error.message || 'An unknown error occurred!',
-//     });
-// });
+app.use((error, req, res, next) => {
+    if (res.headerSent) {
+        return next(error);
+    }
+    res.status(error.code || 500);
+    res.json({
+        message: error.message || 'An unknown error occurred!',
+    });
+});
 
 try {
     mongoose.set('strictQuery', false);
